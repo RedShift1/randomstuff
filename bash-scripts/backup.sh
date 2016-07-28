@@ -47,9 +47,9 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "*** gpart show ***"
-gpart show
+/sbin/gpart show
 echo "*** /etc/fstab ***"
 cat /etc/fstab
 echo "*** pkg info ***"
-pkg info
+/usr/sbin/pkg info
 
