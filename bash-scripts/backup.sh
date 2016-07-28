@@ -39,8 +39,8 @@ done
 
 FILENAME=$(hostname).level${LEVEL}.$(date +"%A").$(date +"%Y-%m-%d").dump.gz
 
-dump -${LEVEL} -uanL -f - / | gzip -2 | \
- ssh -c arcfour ${DEST} "dd of=${FILENAME}.tmp; "'MD5=$(md5sum '"${FILENAME}.tmp"' | cut -d " " -f 1);'"mv ${FILENAME}.tmp ${FILENAME}."'${MD5}'
+/sbin/dump -${LEVEL} -uanL -f - / | /usr/bin/gzip -2 | \
+ /usr/bin/ssh -c arcfour ${DEST} "dd of=${FILENAME}.tmp; "'MD5=$(md5sum '"${FILENAME}.tmp"' | cut -d " " -f 1);'"mv ${FILENAME}.tmp ${FILENAME}."'${MD5}'
 
 if [ $? -ne 0 ]; then
     exit $?
