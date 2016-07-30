@@ -39,7 +39,7 @@ done
 
 FILENAME=$(hostname).level${LEVEL}.$(date +"%Y-%m-%d").$(date +"%a").dump.gz
 
-/sbin/dump -${LEVEL} -uanL -f - / | /usr/bin/gzip -2 | \
+/sbin/dump -${LEVEL} -uanL -b128 -C8 -f - / | /usr/bin/gzip -2 | \
  /usr/bin/ssh -T -x -o Compression=no -c arcfour ${DEST} "dd of=${FILENAME}.tmp; "'MD5=$(md5sum '"${FILENAME}.tmp"' | cut -d " " -f 1);'"mv ${FILENAME}.tmp ${FILENAME}."'${MD5}'
 
 if [ $? -ne 0 ]; then
