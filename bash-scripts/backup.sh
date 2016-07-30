@@ -37,7 +37,7 @@ while getopts ":0123456789x:" OPT; do
     esac
 done
 
-FILENAME=$(hostname).level${LEVEL}.$(date +"%A").$(date +"%Y-%m-%d").dump.gz
+FILENAME=$(hostname).level${LEVEL}.$(date +"%Y-%m-%d").$(date +"%a").dump.gz
 
 /sbin/dump -${LEVEL} -uanL -f - / | /usr/bin/gzip -2 | \
  /usr/bin/ssh -T -x -o Compression=no -c arcfour ${DEST} "dd of=${FILENAME}.tmp; "'MD5=$(md5sum '"${FILENAME}.tmp"' | cut -d " " -f 1);'"mv ${FILENAME}.tmp ${FILENAME}."'${MD5}'
